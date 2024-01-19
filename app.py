@@ -1,5 +1,5 @@
 # from googletrans import Translator
-# import requests
+import requests
 from cs50 import SQL
 from flask import request, Flask, redirect, render_template, session, url_for, send_from_directory
 from flask_session import Session
