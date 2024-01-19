@@ -4,3 +4,4 @@ flask_session
 requests
 Werkzeug==2.2.2
 helpers
+Gunicorn
