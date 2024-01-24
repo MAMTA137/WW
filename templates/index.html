@@ -6,12 +6,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>WorkWave</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="static/homepage.css">
   <script src="static/homepage.js"></script>
 </head>
 
 <body>
+  <div class="container">
   <!-- Nav bar   -->
   <nav>
     <div class="flex main-nav" style="width: 100%; margin-top: 0px;">
@@ -19,9 +22,30 @@
       <div class="nav-links">
         <ul class="fle">
           <li><a href="/" class="hover-link">Home</a></li>
-          <!-- <li><a href="/aboutus" class="hover-link">About Us</a></li> -->
-          <!-- <li><a href="/faq" class="hover-link">FAQ's</a></li> -->
-          <li><a href="#big-feature-section" class="hover-link primary-button">Sign Up/Login</a></li>
+          <!-- <li><a href="/aboutus" class="hover-link">About Us</a></li>
+         <li><a href="/faq" class="hover-link">FAQ's</a></li> -->
+          <!-- <li><a href="#big-feature-section" class="hover-link primary-button">Sign Up/Login</a></li>  -->
+           <div class="dropdown dropdown-bottom dropdown-end">
+            <div tabindex="0" role="button" class="btn m-1">Sign Up</div>
+            <ul tabindex="0" class=" border-2 border-[#243c53] dropdown-content z-[1] menu p-2 shadow bg-[#000000] rounded-box w-52">
+              <li><a  class="border-2 border-[#243c53] bg-base-100 hover:text-white " href="/registerclient">Client </a></li>
+              <li><a class="border-2 border-[#243c53] bg-base-100 hover:text-white" href="/registerprof">professional</a></li>
+            </ul>
+
+          </div>
+          <div class="dropdown dropdown-bottom dropdown-end">
+            <div tabindex="0" role="button" class="btn m-1">Login</div>
+            <ul tabindex="0" class=" border-2 border-[#243c53] dropdown-content  z-[1] menu p-2 shadow bg-[#000000] rounded-box w-52">
+              <li><a class="border-2 border-[#243c53] bg-base-100 hover:text-white" href="/loginclient">Client </a></li>
+              <li><a class="border-2 border-[#243c53] bg-base-100 hover:text-white" href="/loginprof">professional</a></li>
+            </ul>
+
+          </div>
+                       
+                      
+                     
+           
+          </div>
         </ul>
       </div>
     </div>
@@ -121,12 +145,13 @@
       <div class="link-coloumn flex">
         <h4>Made By</h4>
         <a href="https://github.com/ayeshanagdawala/" class="hover-link footer-link">Ayesha Nagdawala</a>
-        <a href="https://github.com/meetalik8/" class="hover-link footer-link">Meetali Kapse</a>
         <a href="https://github.com/mamta137/" class="hover-link footer-link">Mamta Gupta</a>
+        <a href="//github.com/meetalik8/" class="hover-link footer-link">Meetali Kapse</a>
       </div>
 
     </div>
   </footer>
+</div>
   <script src="https://kit.fontawesome.com/cb88b54bf5.js" crossorigin="anonymous"></script>
 </body>
 
