@@ -1,4 +1,4 @@
-![workwave-kq3l onrender com_](https://github.com/MAMTA137/WW/assets/102024852/1ebdb8de-306d-4a47-9463-7562288c3460)# TechnoVerse
+# TechnoVerse
 
 # WORKWAVE
 
