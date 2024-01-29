@@ -40,15 +40,15 @@ def index():
 @app.route("/registerclient", methods=["GET", "POST"])
 def registerclient():
     session.clear()
-    # User reached route via POST (as by submitting a form via POST)
+    
     if request.method == "POST":
-        # get data through post
+    
         email = request.form.get("email")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
         hash = generate_password_hash(password)
         acc_type="client"
-        # empty email, password,confirmation
+     
         if not request.form.get("email"):
             return redirect('/registerclient')
         elif not request.form.get("password"):
@@ -66,22 +66,22 @@ def registerclient():
         except:
             return redirect('/registerclient')
     else:
-        # User reached route via POST (as by submitting a form via GET)
+       
         return render_template("registerclient.html")
 
 # REGISTER PROFESSIONAL 
 @app.route("/registerprof", methods=["GET", "POST"])
 def registerprof():
     session.clear()
-    # User reached route via POST (as by submitting a form via POST)
+
     if request.method == "POST":
-        # get data through post
+     
         email = request.form.get("email")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
         hash = generate_password_hash(password)
         acc_type="prof"
-        # empty email, password,confirmation
+      
         if not request.form.get("email"):
             return redirect('/registerprof')
         elif not request.form.get("password"):
@@ -99,34 +99,34 @@ def registerprof():
         except:
             return redirect('/registerprof')
     else:
-        # User reached route via POST (as by submitting a form via GET)
+       
         return render_template("registerprof.html")
 
 # LOGIN CLIENT 
 @app.route("/loginclient", methods=["GET", "POST"])
 def loginclient():
-   # Forget any user_id
+  
     session.clear()
     acc_type = "client"
-    # User reached route via POST (as by submitting a form via POST)
+  
     if request.method == "POST":
         email = request.form.get("email")
-        # Ensure email was submitted
+       
         if not request.form.get("email"):
             return redirect('/loginclient')
-        # Ensure password was submitted
+
         elif not request.form.get("password"):
             return redirect('/loginclient')
-        # Query database for email
+      
         rows = db.execute("SELECT * FROM users WHERE email = ?",
                           request.form.get("email"))
-         # Ensure email exists and password is correct
+     
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return redirect('/loginclient')
-        # Remember which user has logged in
+   
         session["user_id"] = rows[0]["id"]
         return redirect("/clientdashboard")
-    # User reached route via GET (as by clicking a link or via redirect)
+
     else:
         return render_template("loginclient.html")
     
@@ -134,65 +134,65 @@ def loginclient():
 # LOGIN Professional 
 @app.route("/loginprof", methods=["GET", "POST"])
 def loginprof():
-    # Forget any user_id
+  
     session.clear()
     acc_type = "prof"
-    # User reached route via POST (as by submitting a form via POST)
+  
     if request.method == "POST":
         email = request.form.get("email")
-        # Ensure email was submitted
+    
         if not request.form.get("email"):
             return redirect('/loginprof')
-        # Ensure password was submitted
+        
         elif not request.form.get("password"):
             return redirect('/loginprof')
-        # Query database for email
+
         rows = db.execute("SELECT * FROM users WHERE email = ?",
                           request.form.get("email"))
-        # Ensure email exists and password is correct
+       
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return redirect('/loginprof')
-        # Remember which user has logged in
+   
         session["user_id"] = rows[0]["id"]
         return redirect("/profdashboard")
-    # User reached route via GET (as by clicking a link or via redirect)
+   
     else:
         return render_template("loginprof.html")
 
 # LOGIN ADMIN
 @app.route("/loginadmin", methods=["GET", "POST"])
 def loginadmin():
-    # Forget any user_id
+   
     session.clear()
     acc_type = "admin"
-    # User reached route via POST (as by submitting a form via POST)
+   
     if request.method == "POST":
         email = request.form.get("email")
-        # Ensure email was submitted
+        
         if not request.form.get("email"):
             return redirect('/loginadmin')
-        # Ensure password was submitted
+        
         elif not request.form.get("password"):
             return redirect('/loginadmin')
-        # Query database for email
+        
         rows = db.execute("SELECT * FROM users WHERE email = ?",
                           request.form.get("email"))
-        # Ensure email exists and password is correct
+        
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return redirect('/loginadmin')
-        # Remember which user has logged in
+     
         session["user_id"] = rows[0]["id"]
         return redirect("/admindashboard")
-    # User reached route via GET (as by clicking a link or via redirect)
+    
     else:
         return render_template("loginadmin.html")
 
 @app.route("/logout")
 def logout():
     """Log user out"""
-    # Forget any user_id
+  
     session.clear()
-    # Redirect user to login form
+   
     return redirect("/")
 
 @app.route("/clientform" , methods=["GET", "POST"])
@@ -204,7 +204,7 @@ def clientform():
         name = request.form.get("Name")
         contact = request.form.get("contact")
         address = request.form.get("address")
-        # print(services)
+     
         db.execute("INSERT INTO client (client_id, username, name, contact, address) VALUES (?,?,?,?,?)",
                    id, username, name, contact, address)
         return redirect("/clientdashboard")
