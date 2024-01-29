@@ -1,25 +1,24 @@
-# from googletrans import Translator
+
 import requests
 from cs50 import SQL
 from flask import request, Flask, redirect, render_template, session, url_for, send_from_directory
 from flask_session import Session
-# from datetime import date
+
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-# import sys
+
 
 from helpers import login_required
 
-#debug2
-# Configure application
+
 app = Flask(__name__)
 
-# Configure session to use filesystem (instead of signed cookies)
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Configure CS50 Library to use SQLite database
+
 db = SQL("sqlite:///technoverse.db")
 
 
@@ -36,19 +35,19 @@ def after_request(response):
 def index():
     return render_template("index.html")
 
-# REGISTER CLIENT 
+
 @app.route("/registerclient", methods=["GET", "POST"])
 def registerclient():
     session.clear()
-    # User reached route via POST (as by submitting a form via POST)
+   
     if request.method == "POST":
-        # get data through post
+       
         email = request.form.get("email")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
         hash = generate_password_hash(password)
         acc_type="client"
-        # empty email, password,confirmation
+        
         if not request.form.get("email"):
             return redirect('/registerclient')
         elif not request.form.get("password"):
@@ -66,22 +65,22 @@ def registerclient():
         except:
             return redirect('/registerclient')
     else:
-        # User reached route via POST (as by submitting a form via GET)
+       
         return render_template("registerclient.html")
 
 # REGISTER PROFESSIONAL 
 @app.route("/registerprof", methods=["GET", "POST"])
 def registerprof():
     session.clear()
-    # User reached route via POST (as by submitting a form via POST)
+    
     if request.method == "POST":
-        # get data through post
+      
         email = request.form.get("email")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
         hash = generate_password_hash(password)
         acc_type="prof"
-        # empty email, password,confirmation
+      
         if not request.form.get("email"):
             return redirect('/registerprof')
         elif not request.form.get("password"):
@@ -99,34 +98,34 @@ def registerprof():
         except:
             return redirect('/registerprof')
     else:
-        # User reached route via POST (as by submitting a form via GET)
+       
         return render_template("registerprof.html")
 
 # LOGIN CLIENT 
 @app.route("/loginclient", methods=["GET", "POST"])
 def loginclient():
-   # Forget any user_id
+  
     session.clear()
     acc_type = "client"
-    # User reached route via POST (as by submitting a form via POST)
+  
     if request.method == "POST":
         email = request.form.get("email")
-        # Ensure email was submitted
+      
         if not request.form.get("email"):
             return redirect('/loginclient')
-        # Ensure password was submitted
+      
         elif not request.form.get("password"):
             return redirect('/loginclient')
-        # Query database for email
+      
         rows = db.execute("SELECT * FROM users WHERE email = ?",
                           request.form.get("email"))
-         # Ensure email exists and password is correct
+        
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return redirect('/loginclient')
-        # Remember which user has logged in
+        
         session["user_id"] = rows[0]["id"]
         return redirect("/clientdashboard")
-    # User reached route via GET (as by clicking a link or via redirect)
+
     else:
         return render_template("loginclient.html")
     
@@ -134,65 +133,65 @@ def loginclient():
 # LOGIN Professional 
 @app.route("/loginprof", methods=["GET", "POST"])
 def loginprof():
-    # Forget any user_id
+
     session.clear()
     acc_type = "prof"
-    # User reached route via POST (as by submitting a form via POST)
+    
     if request.method == "POST":
         email = request.form.get("email")
-        # Ensure email was submitted
+       
         if not request.form.get("email"):
             return redirect('/loginprof')
-        # Ensure password was submitted
+      
         elif not request.form.get("password"):
             return redirect('/loginprof')
-        # Query database for email
+       
         rows = db.execute("SELECT * FROM users WHERE email = ?",
                           request.form.get("email"))
-        # Ensure email exists and password is correct
+      
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return redirect('/loginprof')
-        # Remember which user has logged in
+    
         session["user_id"] = rows[0]["id"]
         return redirect("/profdashboard")
-    # User reached route via GET (as by clicking a link or via redirect)
+    
     else:
         return render_template("loginprof.html")
 
 # LOGIN ADMIN
 @app.route("/loginadmin", methods=["GET", "POST"])
 def loginadmin():
-    # Forget any user_id
+   
     session.clear()
     acc_type = "admin"
-    # User reached route via POST (as by submitting a form via POST)
+   
     if request.method == "POST":
         email = request.form.get("email")
-        # Ensure email was submitted
+       
         if not request.form.get("email"):
             return redirect('/loginadmin')
-        # Ensure password was submitted
+        
         elif not request.form.get("password"):
             return redirect('/loginadmin')
-        # Query database for email
+        
         rows = db.execute("SELECT * FROM users WHERE email = ?",
                           request.form.get("email"))
-        # Ensure email exists and password is correct
+       
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return redirect('/loginadmin')
-        # Remember which user has logged in
+        
         session["user_id"] = rows[0]["id"]
         return redirect("/admindashboard")
-    # User reached route via GET (as by clicking a link or via redirect)
+    
     else:
         return render_template("loginadmin.html")
 
 @app.route("/logout")
 def logout():
     """Log user out"""
-    # Forget any user_id
+    
     session.clear()
-    # Redirect user to login form
+   
     return redirect("/")
 
 @app.route("/clientform" , methods=["GET", "POST"])
@@ -204,7 +203,7 @@ def clientform():
         name = request.form.get("Name")
         contact = request.form.get("contact")
         address = request.form.get("address")
-        # print(services)
+     
         db.execute("INSERT INTO client (client_id, username, name, contact, address) VALUES (?,?,?,?,?)",
                    id, username, name, contact, address)
         return redirect("/clientdashboard")
@@ -224,7 +223,6 @@ def profform():
         prof_type = request.form.get("prof_type")
         idlink  = request.form.get("idlink")
         experience  = request.form.get("experience")
-        # print(services)
         db.execute("INSERT INTO prof (prof_id, username, name, contact, address, specialization,prof_type,idlink,workexp) VALUES (?,?,?,?,?,?,?,?,?)",
                    id, username, name, contact, address, specialization,prof_type,idlink,experience)
         return redirect("/profdashboard")
@@ -240,13 +238,13 @@ def profdashboard():
 @app.route("/clientdashboard")
 @login_required
 def clientdashboard():
-    # id = session["user_id"]
+    
     return render_template("clientdashboard.html")
 
 @app.route("/admindashboard")
 @login_required
 def admindashboard():
-    # id = session["user_id"]
+   
     return render_template("admindashboard.html")
 
 
@@ -286,7 +284,7 @@ def IT():
 def FamilyLaw():
     specialization="Family Law"
     query = db.execute("SELECT * FROM prof where specialization = ?", specialization)
-    # print(query)
+   
     return render_template("FamilyLaw.html", list=query)
 
 @app.route("/CorporateLaw")
@@ -294,7 +292,7 @@ def FamilyLaw():
 def CorporateLaw():
     specialization="Corporate Law"
     query = db.execute("SELECT * FROM prof where specialization = ?", specialization)
-    # print(query)
+   
     return render_template("CorporateLaw.html", list=query)
 
 @app.route("/AppDeveloper")
@@ -302,7 +300,7 @@ def CorporateLaw():
 def AppDeveloper():
     specialization="App Developer"
     query = db.execute("SELECT * FROM prof where specialization = ?", specialization)
-    # print(query)
+   
     return render_template("AppDeveloper.html", list=query)
 
 # MAKE Request
@@ -311,7 +309,7 @@ def AppDeveloper():
 def sendreq():
     id = session["user_id"]
     prof_id = request.form.get("prof_id")
-    # quot = request.form.get("quot")
+   
     a=int(prof_id)
     prof_name = db.execute("SELECT name FROM prof WHERE prof_id = ?",
                             prof_id)[0]["name"]
