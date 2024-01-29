@@ -1,18 +1,18 @@
-# TechnoVerse
+# TechnoVerse 🔗https://workwave-kq3l.onrender.com
 
 # WORKWAVE
 
 WorkWave is a web-based application designed for white-collar 👨‍💻👨‍🎓professionals, including lawyers, IT professionals, engineers and other professionals. Clients can connect with various service providers through our platform, eliminating the need to search extensively elsewhere. Users can effortlessly engage with services directly through our platform.
 
-🙋 CLIENTS:
+# 🙋 CLIENTS:
 
 After signing in, users are redirected to the dashboard where they can search for the desired service and connect with their preferred service provider. Additionally, they can view their current service records, and if they encounter any issues or have doubts, they can seamlessly connect to the support page. Moreover, users can engage in Q&A sessions with the chatbot for assistance.
 
-👩‍💼👨‍💼 Professionals:
+# 👩‍💼👨‍💼 Professionals:
 
 Professionals can register themselves by filling out their data and must await acceptance onto our platform. Once accepted, they can receive client requests and connect with them accordingly.
 
-🕵️Admin:
+# 🕵️Admin:
 
 The admin plays a crucial role in the verification of professionals' identities through their registration numbers during the registration process and accepts them accordingly.
 
